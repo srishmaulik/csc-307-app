@@ -11,7 +11,7 @@ function Myapp() {
       characterData={characters}
       removeCharacter={removeOneCharacter}
     />
-    <Form />
+    <Form handleSubmit={updateList} />
   </div>
 );
      function removeOneCharacter(index) {
@@ -19,7 +19,11 @@ function Myapp() {
         return i !== index;
     });
         setCharacters(updated);
-  }	
+  }
+     function updateList(person) {
+       setCharacters([...characters, person]);
+   }
+	
 }
 
 
