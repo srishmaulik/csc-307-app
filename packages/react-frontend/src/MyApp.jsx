@@ -1,31 +1,17 @@
 import React, { useState } from "react";
 import Table from "./Table";
+import Form form "./Form";
 
-function Mypp() {
-   const[characters, setCharacters] = useState([
-  {
-    name: "Charlie",
-    job: "Janitor"
-  },
-  {
-    name: "Mac",
-    job: "Bouncer"
-  },
-  {
-    name: "Dee",
-    job: "Aspring actress"
-  },
-  {
-    name: "Dennis",
-    job: "Bartender"
-  }
-]);
+
+function Myapp() {
+   const[characters, setCharacters] = useState([]);
    return (
   <div className="container">
     <Table
       characterData={characters}
       removeCharacter={removeOneCharacter}
     />
+    <Form />
   </div>
 );
      function removeOneCharacter(index) {
