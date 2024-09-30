@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Table from "./Table";
-import Form form "./Form";
+import Form from "./Form";
 
 
 function Myapp() {
