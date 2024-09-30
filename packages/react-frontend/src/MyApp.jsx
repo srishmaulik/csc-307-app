@@ -3,7 +3,7 @@ import Table from "./Table";
 import Form from "./Form";
 
 
-function Myapp() {
+function MyApp() {
    const[characters, setCharacters] = useState([]);
    return (
   <div className="container">
