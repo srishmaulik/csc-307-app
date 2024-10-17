@@ -1,8 +1,9 @@
 import express from "express";
-
+import cors from "cors";
 const app = express();
 const port = 8000;
 
+app.use(cors());
 app.use(express.json());
 
 app.get("/", (req, res) => {
@@ -80,6 +81,7 @@ app.delete("/users/:id", (req, res) => {
 });
 
 const addUser = (user) => {
+  user.id = generate_id();
   users["users_list"].push(user);
   return user;
 };
@@ -92,4 +94,25 @@ app.post("/users", (req, res) => {
 
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`);
+});
+
+app.post("/users", (req, res) => {
+  const userToAdd = req.body;
+  const addeduser = addUser(userToAdd);
+  res.status(201).send(addeduser); 
+});
+
+const generate_id = () => {  return Math.random().toString(36).substring(2, 9);
+};
+
+app.delete("/users/:id", (req, res) => {
+  const id = req.params["id"];
+  const index = users["users_list"].findIndex((user) => user.id === id);
+
+  if (index === -1) {
+    res.status(404).send("Resource not found.");
+  } else {
+    users["users_list"].splice(index, 1);
+    res.status(204).send(); // Return 204 status code for successful delete
+  }
 });
