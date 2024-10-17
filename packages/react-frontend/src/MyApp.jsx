@@ -25,28 +25,27 @@ function MyApp() {
 );  
 
    
-     
-function removeOneCharacter(id) {
-  fetch(`http://localhost:8000/users/${id}`, {
+function deleteUser(person){
+  const promise = fetch(`http://localhost:8000/users/${person.id}`, {
     method: 'DELETE',
-  })
-  .then((response) => {
-    if (response.status === 204) {
-      // Successful deletion
+    });
+    return promise;
+  }
+function removeOneCharacter(person) {
+  console.log("Delete User with ID:", person.id);
+  deleteUser(person)
+  .then((response)=>{
+    if (response.ok){
       const updatedCharacters = characters.filter((character) => character.id !== id);
       setCharacters(updatedCharacters);
-    } else if (response.status === 404) {
-      // Resource not found
-      console.error('Resource not found.');
-    } else {
-      // Other error
-      console.error('An error occurred during deletion.');
+    }else{console.log("failed");
     }
-  })
-  .catch((error) => {
-    console.error('Error:', error);
+  }).catch((error)=>{console.log("error");
+
   });
 }
+  
+  
   function updateList(person) {
     postUser(person)
       .then(() => setCharacters([...characters, person]))
