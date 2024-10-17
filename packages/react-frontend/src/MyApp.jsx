@@ -25,15 +25,15 @@ function MyApp() {
 );  
 
    
-function deleteUser(person){
-  const promise = fetch(`http://localhost:8000/users/${person.id}`, {
+function deleteUser(id){
+  const promise = fetch(`http://localhost:8000/users/${id}`, {
     method: 'DELETE',
     });
     return promise;
   }
-function removeOneCharacter(person) {
-  console.log("Delete User with ID:", person.id);
-  deleteUser(person)
+function removeOneCharacter(id) {
+  console.log("Delete User with ID:", id);
+  deleteUser(id)
   .then((response)=>{
     if (response.ok){
       const updatedCharacters = characters.filter((character) => character.id !== id);
