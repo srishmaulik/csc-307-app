@@ -25,18 +25,18 @@ function MyApp() {
 );  
 
    
-function deleteUser(id){
-  const promise = fetch(`http://localhost:8000/users/${id}`, {
+function deleteUser(_id){
+  const promise = fetch(`http://localhost:8000/users/${_id}`, {
     method: 'DELETE',
     });
     return promise;
   }
-function removeOneCharacter(id) {
-  console.log("Delete User with ID:", id);
-  deleteUser(id)
+function removeOneCharacter(_id) {
+  console.log("Delete User with ID:", _id);
+  deleteUser(_id)
   .then((response)=>{
     if (response.ok){
-      const updatedCharacters = characters.filter((character) => character.id !== id);
+      const updatedCharacters = characters.filter((character) => character.id !== _id);
       setCharacters(updatedCharacters);
     }else{console.log("failed");
     }

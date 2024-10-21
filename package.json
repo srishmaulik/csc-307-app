@@ -9,7 +9,10 @@
   },
   "author": "",
   "license": "ISC",
-    "workspaces": [
-        "packages/*"
-    ]
+  "workspaces": [
+    "packages/*"
+  ],
+  "dependencies": {
+    "mongodb": "^6.9.0"
+  }
 }
