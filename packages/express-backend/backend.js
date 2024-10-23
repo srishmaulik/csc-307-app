@@ -1,15 +1,16 @@
 import express from "express";
 import cors from "cors";
-import userService from "./user-service.js"; // Import the user service
+import userService from "./services/user-service.js"; // Import the user service
 import dotenv from "dotenv";
 import mongoose from "mongoose";
-
 
 dotenv.config();
 
 const { MONGO_CONNECTION_STRING } = process.env;
 
 mongoose.set("debug", true);
+
+// Ensure this is only called once and no other connection calls exist
 mongoose
   .connect(MONGO_CONNECTION_STRING)
   .catch((error) => console.log(error));
@@ -39,10 +40,10 @@ app.get("/users", (req, res) => {
 });
 
 // Get user by ID
-app.get("/users/:id", (req, res) => {
-  const id = req.params.id;
+app.get("/users/:_id", (req, res) => {
+  const _id = req.params._id;
 
-  userService.findUserById(id)
+  userService.findUserById(_id)
     .then((user) => {
       if (user) {
         res.send(user);
@@ -69,10 +70,10 @@ app.post("/users", (req, res) => {
 });
 
 // Delete user by ID
-app.delete("/users/:id", (req, res) => {
-  const id = req.params.id;
+app.delete("/users/:_id", (req, res) => {
+  const _id = req.params._id;
 
-  userService.findUserByIdAndDelete(id)
+  userService.findUserByIdAndDelete(_id)
     .then((deletedUser) => {
       if (deletedUser) {
         res.status(204).send(); // Return 204 status code for successful delete

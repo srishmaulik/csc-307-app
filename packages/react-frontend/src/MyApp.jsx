@@ -36,7 +36,7 @@ function removeOneCharacter(_id) {
   deleteUser(_id)
   .then((response)=>{
     if (response.ok){
-      const updatedCharacters = characters.filter((character) => character.id !== _id);
+      const updatedCharacters = characters.filter((character) => character._id !== _id);
       setCharacters(updatedCharacters);
     }else{console.log("failed");
     }
